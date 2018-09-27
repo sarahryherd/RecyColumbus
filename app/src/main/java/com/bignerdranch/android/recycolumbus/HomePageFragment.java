@@ -29,6 +29,15 @@ public class HomePageFragment extends Fragment {
             }
         });
 
+        mSignupButton = v.findViewById(R.id.home_signup_button);
+        mSignupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent signupIntent = SignupActivity.newIntent(getActivity());
+                startActivity(signupIntent);
+            }
+        });
+
         return v;
     }
 }
