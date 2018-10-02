@@ -19,10 +19,10 @@
         <activity android:name=".SignupActivity" />
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"></activity>
+            android:label="@string/title_activity_settings" />
         <activity
             android:name=".Information"
-            android:label="@string/title_activity_information"></activity>
+            android:label="@string/title_activity_information"/>
     </application>
 
 </manifest>
