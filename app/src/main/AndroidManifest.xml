@@ -12,6 +12,7 @@
         <activity android:name=".HomePageActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -22,7 +23,11 @@
             android:label="@string/title_activity_settings" />
         <activity
             android:name=".InformationActivity"
-            android:label="@string/title_activity_information"/>
+            android:label="@string/title_activity_information" />
+        <activity
+            android:name=".BarcodeActivity"
+            android:label="@string/title_activity_barcode"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
