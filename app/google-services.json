@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "403614616782",
+    "firebase_url": "https://recycolumbus-f20ff.firebaseio.com",
+    "project_id": "recycolumbus-f20ff",
+    "storage_bucket": "recycolumbus-f20ff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:403614616782:android:79098ce9093468c4",
+        "android_client_info": {
+          "package_name": "com.bignerdranch.android.recycolumbus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "403614616782-rn6ng9g7o83kokap29h6blgvvjti6529.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bignerdranch.android.recycolumbus",
+            "certificate_hash": "4d205e690257c1a50ea657ef8c443070f25a4fb2"
+          }
+        },
+        {
+          "client_id": "403614616782-69krs5efr14v6oljv5fkihhier0e0a2u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFgzCW8kHayaDQZIAu1B7gVBHgyYTeiJA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "403614616782-69krs5efr14v6oljv5fkihhier0e0a2u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

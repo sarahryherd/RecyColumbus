@@ -21,7 +21,7 @@
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />
         <activity
-            android:name=".Information"
+            android:name=".InformationActivity"
             android:label="@string/title_activity_information"/>
     </application>
 

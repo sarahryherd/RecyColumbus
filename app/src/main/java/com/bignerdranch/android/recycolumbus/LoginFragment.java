@@ -1,6 +1,5 @@
 package com.bignerdranch.android.recycolumbus;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -36,7 +35,13 @@ public class LoginFragment extends Fragment {
         });
 
         mLoginButton = v.findViewById(R.id.login_login_button);
-        mLoginButton.setEnabled(false);
+        mLoginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent infoIntent = InformationActivity.newIntent(getActivity());
+                startActivity(infoIntent);
+            }
+        });
 
         return v;
     }

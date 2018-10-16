@@ -1,5 +1,7 @@
 package com.bignerdranch.android.recycolumbus;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -7,9 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
-public class Information extends AppCompatActivity {
+public class InformationActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
 
@@ -20,7 +21,7 @@ public class Information extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_information:
-                    mTextMessage.setText("Information");
+                    mTextMessage.setText("InformationActivity");
                     return true;
                 case R.id.navigation_location:
                     mTextMessage.setText("Location");
@@ -35,6 +36,10 @@ public class Information extends AppCompatActivity {
             return false;
         }
     };
+
+    public static Intent newIntent(Context packageContext) {
+        return new Intent(packageContext, InformationActivity.class);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
