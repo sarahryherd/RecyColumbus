@@ -9,8 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import com.firebase.ui.auth.AuthUI;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class HomePageFragment extends Fragment {
+
+    private static final int RC_SIGN_IN = 123;
 
     private Button mLoginButton;
     private Button mSignupButton;
@@ -24,8 +30,8 @@ public class HomePageFragment extends Fragment {
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent loginIntent = LoginActivity.newIntent(getActivity());
-                startActivity(loginIntent);
+                Intent authIntent = AuthenticationActivity.newIntent(getActivity());
+                startActivity(authIntent);
             }
         });
 
@@ -33,11 +39,27 @@ public class HomePageFragment extends Fragment {
         mSignupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent signupIntent = SignupActivity.newIntent(getActivity());
-                startActivity(signupIntent);
+                createSignInIntent();
             }
         });
 
         return v;
+    }
+
+    public void createSignInIntent() {
+        // [START auth_fui_create_intent]
+        // Choose authentication providers
+        List<AuthUI.IdpConfig> providers = Arrays.asList(
+                new AuthUI.IdpConfig.EmailBuilder().build(),
+                new AuthUI.IdpConfig.GoogleBuilder().build());
+
+        // Create and launch sign-in intent
+        startActivityForResult(
+                AuthUI.getInstance()
+                        .createSignInIntentBuilder()
+                        .setAvailableProviders(providers)
+                        .build(),
+                RC_SIGN_IN);
+        // [END auth_fui_create_intent]
     }
 }
