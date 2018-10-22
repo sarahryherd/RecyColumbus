@@ -31,6 +31,9 @@
         <activity
             android:name=".MapActivity"
             android:label="@string/title_activity_map"></activity>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDs50dGxqJjJ7hQPsdfo-vy3sF0TgKtGXs"/>
     </application>
 
 </manifest>
