@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class SignUpFragment extends Fragment {
 
@@ -36,7 +37,7 @@ public class SignUpFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        mAuth = FirebaseAuth.getInstance();
     }
 
     @Nullable
@@ -58,8 +59,6 @@ public class SignUpFragment extends Fragment {
             }
         });
 
-        mAuth = FirebaseAuth.getInstance();
-
         return v;
     }
 
@@ -78,6 +77,7 @@ public class SignUpFragment extends Fragment {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            addNameToUser(user);
                             Intent infoIntent = InformationActivity.newIntent(getActivity());
                             startActivity(infoIntent);
                         } else {
@@ -91,8 +91,41 @@ public class SignUpFragment extends Fragment {
         // [END create_user_with_email]
     }
 
+    private void addNameToUser(FirebaseUser user){
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName(mFirstName.getText().toString() + " " + mLastName.getText().toString())
+                .build();
+
+        user.updateProfile(profileUpdates)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "User profile updated.");
+                        }
+                    }
+                });
+
+    }
+
     private boolean validateForm() {
         boolean valid = true;
+
+        String firstName = mFirstName.getText().toString();
+        if (TextUtils.isEmpty(firstName)) {
+            mFirstName.setError("Required.");
+            valid = false;
+        } else {
+            mFirstName.setError(null);
+        }
+
+        String lastName = mLastName.getText().toString();
+        if (TextUtils.isEmpty(lastName)) {
+            mLastName.setError("Required.");
+            valid = false;
+        } else {
+            mLastName.setError(null);
+        }
 
         String email = mEmail.getText().toString();
         if (TextUtils.isEmpty(email)) {
