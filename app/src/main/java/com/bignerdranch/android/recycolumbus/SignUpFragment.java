@@ -36,7 +36,7 @@ public class SignUpFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mAuth = FirebaseAuth.getInstance();
+
     }
 
     @Nullable
@@ -58,6 +58,7 @@ public class SignUpFragment extends Fragment {
             }
         });
 
+        mAuth = FirebaseAuth.getInstance();
 
         return v;
     }
