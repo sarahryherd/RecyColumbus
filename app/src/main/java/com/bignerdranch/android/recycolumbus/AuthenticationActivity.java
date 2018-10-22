@@ -28,14 +28,12 @@ public class AuthenticationActivity extends AppCompatActivity{
         mSignUpToggle = findViewById(R.id.sign_up_toggle);
 
         FragmentManager fm = getSupportFragmentManager();
-        Fragment authFragment = fm.findFragmentById(R.id.authentication_fragment_container);
 
-        if(authFragment == null) {
-            authFragment = new LogInFragment();
-            fm.beginTransaction()
-                    .add(R.id.authentication_fragment_container, authFragment)
-                    .commit();
-            mLogInToggle.setEnabled(false);
+        if(fm.findFragmentById(R.id.authentication_fragment_container) == null) {
+            Intent intent = getIntent();
+            int buttonPressedToInitiateActivity = intent.getIntExtra(HomePageFragment.BUTTON_PRESSED, 0);
+
+            attachAuthenticationFragment(fm, buttonPressedToInitiateActivity);
         }
 
         mLogInToggle.setOnClickListener(new View.OnClickListener() {
@@ -60,5 +58,26 @@ public class AuthenticationActivity extends AppCompatActivity{
             }
         });
 
+    }
+
+    private void attachAuthenticationFragment(FragmentManager fm, int buttonPressed) {
+        Fragment authFragment;
+        switch(buttonPressed) {
+            case R.id.home_login_button:
+                authFragment = new LogInFragment();
+                mLogInToggle.setEnabled(false);
+                break;
+            case R.id.home_signup_button:
+                authFragment = new SignUpFragment();
+                mSignUpToggle.setEnabled(false);
+                break;
+            default:
+                    authFragment = null;
+                    break;
+        }
+
+        fm.beginTransaction()
+                .add(R.id.authentication_fragment_container, authFragment)
+                .commit();
     }
 }

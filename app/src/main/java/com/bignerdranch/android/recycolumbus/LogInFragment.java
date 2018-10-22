@@ -19,7 +19,7 @@ public class LogInFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_login, container, false);
 
-        mLoginButton = v.findViewById(R.id.login_login_button);
+        mLoginButton = v.findViewById(R.id.log_in_log_in_button);
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
