@@ -27,7 +27,10 @@
         <activity
             android:name=".BarcodeActivity"
             android:label="@string/title_activity_barcode"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MapActivity"
+            android:label="@string/title_activity_map"></activity>
     </application>
 
 </manifest>
