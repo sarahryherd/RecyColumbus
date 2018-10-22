@@ -17,14 +17,17 @@ public class MapActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
+                case R.id.navigation_information:
+                    mTextMessage.setText("InformationActivity");
                     return true;
-                case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
+                case R.id.navigation_location:
+                    mTextMessage.setText("Location");
                     return true;
-                case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
+                case R.id.navigation_search:
+                    mTextMessage.setText("Search");
+                    return true;
+                case R.id.navigation_settings:
+                    mTextMessage.setText("Settings");
                     return true;
             }
             return false;
