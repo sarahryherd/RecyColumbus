@@ -36,7 +36,6 @@ public class HomePageFragment extends Fragment {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null) {
             Log.d("BLAH", "HELLO " + currentUser.getDisplayName());
-            mAuth.signOut();
             Intent infoIntent = InformationActivity.newIntent(getActivity());
             startActivity(infoIntent);
         }
@@ -66,9 +65,9 @@ public class HomePageFragment extends Fragment {
         return v;
     }
 
-    private void startAuthenticationActivity(View v) {
+    private void startAuthenticationActivity(View buttonPressed) {
         Intent authIntent = AuthenticationActivity.newIntent(getActivity());
-        authIntent.putExtra(BUTTON_PRESSED, v.getId());
+        authIntent.putExtra(BUTTON_PRESSED, buttonPressed.getId());
         startActivity(authIntent);
     }
 }
