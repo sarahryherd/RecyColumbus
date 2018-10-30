@@ -12,7 +12,7 @@ import android.webkit.WebView;
 
 public class InformationActivity extends AppCompatActivity {
 
-    private TextView mTextMessage;
+    //private TextView mTextMessage;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -21,16 +21,19 @@ public class InformationActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_information:
-                    mTextMessage.setText("InformationActivity");
+                    //mTextMessage.setText("Information");
                     return true;
                 case R.id.navigation_location:
-                    mTextMessage.setText("Location");
+                    //mTextMessage.setText("Location");
+                    startActivity(new Intent(InformationActivity.this, MapActivity.class));
                     return true;
                 case R.id.navigation_search:
-                    mTextMessage.setText("Search");
+                    //mTextMessage.setText("Search");
+                    startActivity(new Intent(InformationActivity.this, SearchActivity.class));
                     return true;
                 case R.id.navigation_settings:
-                    mTextMessage.setText("Settings");
+                    //mTextMessage.setText("Settings");
+                    startActivity(new Intent(InformationActivity.this, SettingsActivity.class));
                     return true;
             }
             return false;
@@ -46,7 +49,7 @@ public class InformationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
+        //mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
