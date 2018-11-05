@@ -19,15 +19,22 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.util.List;
+import java.util.UUID;
 
 public class SearchFragment extends Fragment {
 
     private static final int REQUEST_PHOTO = 0;
 
-    private static final String photoAuthority = "recycolumbus.fileprovider";
+    private static final String photoAuthority = "com.bignerdranch.android.recycolumbus.fileprovider";
 
     private File mBarcodePhoto;
     private Button mScannerButton;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mBarcodePhoto = new File(getContext().getFilesDir(), "IMG_BARCODE_TEST.jpg");
+    }
 
     @Nullable
     @Override

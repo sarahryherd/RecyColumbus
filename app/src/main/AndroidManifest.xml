@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.bignerdranch.android.recycolumbus">
 
-
+    <uses-feature android:name="android.hardware.camera"
+        android:required="false"
+        />
 
     <application
         android:allowBackup="true"
@@ -35,9 +37,22 @@
         <activity
             android:name=".MapActivity"
             android:label="@string/title_activity_map"></activity>
+        <activity
+            android:name=".SearchActivity"
+            android:label="@string/title_activity_search"
+            android:exported="true"></activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDs50dGxqJjJ7hQPsdfo-vy3sF0TgKtGXs"/>
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.bignerdranch.android.recycolumbus.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/files"/>
+        </provider>
     </application>
 
 </manifest>
