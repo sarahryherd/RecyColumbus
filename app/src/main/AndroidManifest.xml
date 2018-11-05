@@ -24,14 +24,19 @@
         <activity android:name=".AuthenticationActivity" />
         <activity
             android:name=".SettingsActivity"
+            android:exported="true"
             android:label="@string/title_activity_settings" />
         <activity
             android:name=".InformationActivity"
             android:label="@string/title_activity_information" />
         <activity
+            android:name=".ChangePasswordFragment"
+            android:label="ChangePassword" />
+        <activity
             android:name=".BarcodeActivity"
             android:label="@string/title_activity_barcode"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".MapActivity"
             android:label="@string/title_activity_map">
@@ -40,8 +45,12 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDs50dGxqJjJ7hQPsdfo-vy3sF0TgKtGXs" />
+
+        <activity android:name=".DeleteAccountFragment"></activity>
             android:value="@string/google_maps_key"/>
     </application>
 
