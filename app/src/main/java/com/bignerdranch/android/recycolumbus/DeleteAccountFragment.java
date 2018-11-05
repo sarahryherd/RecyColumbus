@@ -12,6 +12,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,6 +26,7 @@ public class DeleteAccountFragment extends AppCompatActivity {
     private EditText password;
     private String passwordText = "";
     private Button changePassword;
+    private TextView plainText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,8 @@ public class DeleteAccountFragment extends AppCompatActivity {
         setContentView(R.layout.activity_delete_account_fragment);
 
         password = (EditText) findViewById(R.id.password);
+        plainText = (TextView) findViewById(R.id.plainText);
+        plainText.setFocusable(false);
         password.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
