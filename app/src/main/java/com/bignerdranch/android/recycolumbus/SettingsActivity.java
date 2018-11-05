@@ -50,6 +50,7 @@ public class SettingsActivity extends AppCompatActivity {
     private TextView nameText;
     private static final int PICK_IMAGE = 100;
     private Uri imageUri;
+    private int REQUEST_CODE = 1;
 
     public static Intent newIntent(Context packageContext) {
         return new Intent(packageContext, SettingsActivity.class);
@@ -110,16 +111,25 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void openGallery() {
-        Intent gallery = new Intent(Intent.ACTION_PICK, Media.INTERNAL_CONTENT_URI);
-        startActivityForResult(gallery, PICK_IMAGE);
+        Intent gallery = new Intent();
+        gallery.setType("image/*");
+        gallery.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(gallery,"Select Picture"), REQUEST_CODE);
+        //Intent gallery = new Intent(Intent.ACTION_PICK, Media.INTERNAL_CONTENT_URI);
+        //startActivityForResult(gallery, PICK_IMAGE);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE){
+        if(resultCode == RESULT_OK){
             imageUri = data.getData();
-            icon_button.setImageURI(imageUri);
+            try {
+                Bitmap bmp = MediaStore.Images.Media.getBitmap(getContentResolver(),imageUri);
+                icon_button.setImageBitmap(bmp);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
