@@ -20,6 +20,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpFragment extends Fragment {
 
@@ -33,11 +35,13 @@ public class SignUpFragment extends Fragment {
     private Button mSignUpButton;
 
     private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference("USERS");
     }
 
     @Nullable
@@ -78,6 +82,7 @@ public class SignUpFragment extends Fragment {
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             addNameToUser(user);
+                            createUser(user);
                             Intent infoIntent = InformationActivity.newIntent(getActivity());
                             startActivity(infoIntent);
                         } else {
@@ -106,6 +111,14 @@ public class SignUpFragment extends Fragment {
                     }
                 });
 
+    }
+
+    private void createUser(FirebaseUser fbUser) {
+        fbUser.reload();
+        String userID = fbUser.getUid();
+        String name = mFirstName.getText().toString() + " " + mLastName.getText().toString();
+        User user = new User(name,fbUser.getEmail());
+        mDatabase.child(userID).setValue(user);
     }
 
     private boolean validateForm() {
