@@ -16,12 +16,16 @@
             android:id="@+id/log_in_toggle"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/log_in"/>
+            android:text="@string/log_in"
+            android:textColor="@color/colorWhite"
+            android:background="@color/colorAqua"/>
         <Button
             android:id="@+id/sign_up_toggle"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/sign_up"/>
+            android:text="@string/sign_up"
+            android:textColor="@color/colorWhite"
+            android:background="@color/colorAqua"/>
 
     </LinearLayout>
 
