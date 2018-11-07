@@ -27,7 +27,8 @@ public class InformationActivity extends AppCompatActivity {
                     mTextMessage.setText("Location");
                     return true;
                 case R.id.navigation_search:
-                    mTextMessage.setText("Search");
+                    Intent intent = new Intent(InformationActivity.this, SearchActivity.class);
+                    startActivity(intent);
                     return true;
                 case R.id.navigation_settings:
                     mTextMessage.setText("Settings");
