@@ -77,8 +77,6 @@ public class MapActivity extends AppCompatActivity
     private String[] mLikelyPlaceAttributions;
     private LatLng[] mLikelyPlaceLatLngs;
 
-    //private TextView mTextMessage;
-
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -86,18 +84,14 @@ public class MapActivity extends AppCompatActivity
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_information:
-                    //mTextMessage.setText("Information");
                     return true;
                 case R.id.navigation_location:
-                    //mTextMessage.setText("Location");
                     startActivity(new Intent(MapActivity.this, MapActivity.class));
                     return true;
                 case R.id.navigation_search:
-                    //mTextMessage.setText("Search");
                     startActivity(new Intent(MapActivity.this, SearchActivity.class));
                     return true;
                 case R.id.navigation_settings:
-                    //mTextMessage.setText("Settings");
                     startActivity(new Intent(MapActivity.this, SettingsActivity.class));
                     return true;
             }
@@ -122,9 +116,10 @@ public class MapActivity extends AppCompatActivity
         // Retrieve the content view that renders the map.
         setContentView(R.layout.activity_map);
 
-        //mTextMessage = findViewById(R.id.message);
+        //navigation bar
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        navigation.getMenu().findItem(R.id.navigation_location).setChecked(true);
 
         // Construct a GeoDataClient.
         mGeoDataClient = Places.getGeoDataClient(this, null);

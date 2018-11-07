@@ -1,44 +1,22 @@
 package com.bignerdranch.android.recycolumbus;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import org.w3c.dom.Text;
-
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
-
-import static android.app.PendingIntent.getActivity;
-import static android.provider.MediaStore.*;
-import static android.provider.MediaStore.Images.*;
-import static android.provider.MediaStore.Video.Thumbnails.INTERNAL_CONTENT_URI;
+import static android.provider.MediaStore.Images.Media;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -51,6 +29,28 @@ public class SettingsActivity extends AppCompatActivity {
     private static final int PICK_IMAGE = 100;
     private Uri imageUri;
 
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_information:
+                    return true;
+                case R.id.navigation_location:
+                    startActivity(new Intent(SettingsActivity.this, MapActivity.class));
+                    return true;
+                case R.id.navigation_search:
+                    startActivity(new Intent(SettingsActivity.this, SearchActivity.class));
+                    return true;
+                case R.id.navigation_settings:
+                    startActivity(new Intent(SettingsActivity.this, SettingsActivity.class));
+                    return true;
+            }
+            return false;
+        }
+    };
+
     public static Intent newIntent(Context packageContext) {
         return new Intent(packageContext, SettingsActivity.class);
     }
@@ -60,13 +60,18 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 
-        delete_button = (Button) findViewById(R.id.deleteAcctButt);
-        changePass_button = (Button) findViewById(R.id.changePassBut);
-        logout_button = (Button) findViewById(R.id.logoutBut);
-        icon_button = (ImageButton) findViewById(R.id.changeIconBut);
-        emailText = (TextView) findViewById(R.id.emailText);
+        //navigation bar
+        BottomNavigationView navigation = findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        navigation.getMenu().findItem(R.id.navigation_settings).setChecked(true);
+
+        delete_button = findViewById(R.id.deleteAcctButt);
+        changePass_button = findViewById(R.id.changePassBut);
+        logout_button = findViewById(R.id.logoutBut);
+        icon_button = findViewById(R.id.changeIconBut);
+        emailText = findViewById(R.id.emailText);
         emailText.setFocusable(false);
-        nameText = (TextView) findViewById(R.id.nameText);
+        nameText = findViewById(R.id.nameText);
 
         //Get user's email from firebase
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
