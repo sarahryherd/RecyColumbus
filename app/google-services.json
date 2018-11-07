@@ -23,6 +23,58 @@
           }
         },
         {
+          "client_id": "403614616782-qql5kic2u721r15ovsdlg4vhgv8cmmjb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bignerdranch.android.recycolumbus",
+            "certificate_hash": "4b5c88856b6b62ce3454779b823184d0865824c8"
+          }
+        },
+        {
+          "client_id": "403614616782-69krs5efr14v6oljv5fkihhier0e0a2u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFgzCW8kHayaDQZIAu1B7gVBHgyYTeiJA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "403614616782-69krs5efr14v6oljv5fkihhier0e0a2u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:403614616782:android:955bc636a5ddd02e",
+        "android_client_info": {
+          "package_name": "com.bignerdranch.morales201.criminalintent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "403614616782-8pnc7uh4u3jih73lbo1se4v1qaaliobo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bignerdranch.morales201.criminalintent",
+            "certificate_hash": "4d205e690257c1a50ea657ef8c443070f25a4fb2"
+          }
+        },
+        {
           "client_id": "403614616782-69krs5efr14v6oljv5fkihhier0e0a2u.apps.googleusercontent.com",
           "client_type": 3
         }
