@@ -44,6 +44,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password"
         android:textColor="@color/colorWhite"
-        android:background="@color/colorAqua"/>
+        android:background="@drawable/button_rounded_corners"/>
 
 </android.support.constraint.ConstraintLayout>
