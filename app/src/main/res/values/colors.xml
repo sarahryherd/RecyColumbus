@@ -6,4 +6,6 @@
     <color name="colorWhite">#ffffff</color>
     <color name="colorWhiteTransparent">#80ffffff</color>
     <color name="colorAqua">#00D2AF</color>
+    <color name="colorAquaDark">#007e69</color>
+    <color name="colorAccent2">#af00d2</color>
 </resources>
