@@ -3,6 +3,8 @@ package com.bignerdranch.android.recycolumbus;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -14,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -79,12 +82,15 @@ public class SettingsActivity extends AppCompatActivity {
         nameText = findViewById(R.id.nameText);
 
         //Get user's email from firebase
-        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        final String email = user.getEmail();
-        final String password;
-        String name = user.getDisplayName();
-        emailText.setText(email);
-        nameText.setText(name);
+        boolean isConnected = hasNetworkConnection();
+        if(isConnected == true) {
+            final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            final String email = user.getEmail();
+            final String password;
+            String name = user.getDisplayName();
+            emailText.setText(email);
+            nameText.setText(name);
+        }
 
         delete_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,6 +123,15 @@ public class SettingsActivity extends AppCompatActivity {
                 openGallery();
             }
         });
+
+        if(isConnected == false){
+            Context context = getApplicationContext();
+            CharSequence text = "No Internet Connection";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        }
     }
 
     private void openGallery() {
@@ -124,8 +139,24 @@ public class SettingsActivity extends AppCompatActivity {
         gallery.setType("image/*");
         gallery.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(gallery,"Select Picture"), REQUEST_CODE);
-        //Intent gallery = new Intent(Intent.ACTION_PICK, Media.INTERNAL_CONTENT_URI);
-        //startActivityForResult(gallery, PICK_IMAGE);
+
+    }
+
+    private boolean hasNetworkConnection() {
+        ConnectivityManager connectivityManager =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo =
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        boolean isConnected = true;
+        boolean isWifiAvailable = networkInfo.isAvailable();
+        boolean isWifiConnected = networkInfo.isConnected();
+        networkInfo =
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        boolean isMobileAvailable = networkInfo.isAvailable();
+        boolean isMobileConnnected = networkInfo.isConnected();
+        isConnected = (isMobileAvailable&&isMobileConnnected) ||
+                (isWifiAvailable&&isWifiConnected);
+        return(isConnected);
     }
 
     @Override

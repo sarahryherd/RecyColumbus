@@ -90,18 +90,27 @@ public class ChangePasswordFragment extends AppCompatActivity {
                                @Override
                                public void onComplete(@NonNull Task<Void> task) {
                                    if (task.isSuccessful()){
-                                       //Toast.makeText(context, "Password successfully changed", Toast.LENGTH_SHORT).show();
                                        Intent intent = new Intent(ChangePasswordFragment.this, SettingsActivity.class);
                                        startActivity(intent);
                                    }
                                    else{
-                                       //Toast.makeText(context, "Error: Change password", Toast.LENGTH_SHORT).show();
+                                       Context context = getApplicationContext();
+                                       CharSequence text = "System error: password cannot be changed";
+                                       int duration = Toast.LENGTH_SHORT;
+
+                                       Toast toast = Toast.makeText(context, text, duration);
+                                       toast.show();
                                    }
                                }
                            });
                         }
                         else{
-                            //Toast.makeText(context, "Password is not correct", Toast.LENGTH_SHORT).show();
+                            Context context = getApplicationContext();
+                            CharSequence text = "The password you entered is not correct";
+                            int duration = Toast.LENGTH_SHORT;
+
+                            Toast toast = Toast.makeText(context, text, duration);
+                            toast.show();
                         }
                     }
                 });
