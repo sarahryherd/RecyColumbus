@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,8 +34,8 @@ public class DeleteAccountFragment extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete_account_fragment);
 
-        password = (EditText) findViewById(R.id.password);
-        plainText = (TextView) findViewById(R.id.plainText);
+        password = findViewById(R.id.password);
+        plainText = findViewById(R.id.plainText);
         plainText.setFocusable(false);
         password.addTextChangedListener(new TextWatcher() {
             @Override
@@ -53,7 +54,7 @@ public class DeleteAccountFragment extends AppCompatActivity {
             }
         });
 
-        changePassword = (Button) findViewById(R.id.deleteButt);
+        changePassword = findViewById(R.id.deleteButt);
         changePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,21 +66,25 @@ public class DeleteAccountFragment extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                        AuthCredential crendential = EmailAuthProvider.getCredential(user.getEmail(),passwordText);
-                        user.reauthenticate(crendential).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        Context context = getApplicationContext();
-                                        Toast.makeText(context, "User has been deleted", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(DeleteAccountFragment.this, HomePageActivity.class);
-                                        startActivity(intent);
-                                    }
-                                });
-                            }
-                        });
+                        if(user != null) {
+                            AuthCredential credential = EmailAuthProvider.getCredential(user.getEmail(), passwordText);
+                            user.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            Context context = getApplicationContext();
+                                            Toast.makeText(context, "User has been deleted", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(DeleteAccountFragment.this, HomePageActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    });
+                                }
+                            });
+                        }else {
+                            Log.e("NULL","Null encountered when trying to access user onClick");
+                        }
 
                         dialog.dismiss();
                     }

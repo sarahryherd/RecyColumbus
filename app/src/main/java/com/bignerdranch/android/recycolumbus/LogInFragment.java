@@ -26,7 +26,6 @@ public class LogInFragment extends Fragment {
 
     private TextInputEditText mEmail;
     private TextInputEditText mPassword;
-    private Button mLoginButton;
 
     private FirebaseAuth mAuth;
 
@@ -38,7 +37,7 @@ public class LogInFragment extends Fragment {
         mEmail = v.findViewById(R.id.log_in_email);
         mPassword = v.findViewById(R.id.log_in_password);
 
-        mLoginButton = v.findViewById(R.id.log_in_log_in_button);
+        Button mLoginButton = v.findViewById(R.id.log_in_log_in_button);
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,6 +81,7 @@ public class LogInFragment extends Fragment {
     private boolean validateForm() {
         boolean valid = true;
 
+        
         String email = mEmail.getText().toString();
         if (TextUtils.isEmpty(email)) {
             mEmail.setError("Required.");

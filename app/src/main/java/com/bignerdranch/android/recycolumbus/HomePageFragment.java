@@ -18,9 +18,6 @@ public class HomePageFragment extends Fragment {
 
     public static final String BUTTON_PRESSED = "Was it sign in or was it log in?";
 
-    private Button mLogInButton;
-    private Button mSignUpButton;
-
     private FirebaseAuth mAuth;
 
     @Override
@@ -46,7 +43,7 @@ public class HomePageFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_home_page, container, false);
 
-        mLogInButton = v.findViewById(R.id.home_login_button);
+        Button mLogInButton = v.findViewById(R.id.home_login_button);
         mLogInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,7 +51,7 @@ public class HomePageFragment extends Fragment {
             }
         });
 
-        mSignUpButton = v.findViewById(R.id.home_signup_button);
+        Button mSignUpButton = v.findViewById(R.id.home_signup_button);
         mSignUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
