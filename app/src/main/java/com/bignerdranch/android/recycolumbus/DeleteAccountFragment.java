@@ -69,15 +69,25 @@ public class DeleteAccountFragment extends AppCompatActivity {
                         user.reauthenticate(crendential).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        Context context = getApplicationContext();
-                                        Toast.makeText(context, "User has been deleted", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(DeleteAccountFragment.this, HomePageActivity.class);
-                                        startActivity(intent);
-                                    }
-                                });
+                                if (task.isSuccessful()) {
+                                    user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            Context context = getApplicationContext();
+                                            Toast.makeText(context, "User has been deleted", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(DeleteAccountFragment.this, HomePageActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    });
+                                }
+                                else{
+                                    Context context = getApplicationContext();
+                                    CharSequence text = "The password you entered is not correct";
+                                    int duration = Toast.LENGTH_SHORT;
+
+                                    Toast toast = Toast.makeText(context, text, duration);
+                                    toast.show();
+                                }
                             }
                         });
 
