@@ -2,11 +2,14 @@ package com.bignerdranch.android.recycolumbus;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
+import android.webkit.WebSettings;
 import android.widget.TextView;
 import android.webkit.WebView;
 
@@ -48,6 +51,24 @@ public class InformationActivity extends AppCompatActivity {
         navigation.getMenu().findItem(R.id.navigation_information).setChecked(true);
 
         WebView myWebView = findViewById(R.id.webview);
+        WebSettings settings = myWebView.getSettings();
+        settings.setJavaScriptEnabled(true);
+        settings.setLoadWithOverviewMode(true);
+        settings.setUseWideViewPort(true);
+        settings.setSupportZoom(true);
+        settings.setBuiltInZoomControls(false);
+        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+        settings.setDomStorageEnabled(true);
+        myWebView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+        myWebView.setScrollbarFadingEnabled(true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            // chromium, enable hardware acceleration
+            myWebView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+        } else {
+            // older android version, disable hardware acceleration
+            myWebView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        }
         myWebView.loadUrl("https://www.columbus.gov/publicservice/RecyColumbus/");
     }
 
