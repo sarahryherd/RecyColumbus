@@ -2,6 +2,8 @@ package com.bignerdranch.android.recycolumbus;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -46,6 +48,10 @@ public class InformationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information);
 
+        if(!hasNetworkConnection()){
+
+        }
+
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.getMenu().findItem(R.id.navigation_information).setChecked(true);
@@ -70,6 +76,23 @@ public class InformationActivity extends AppCompatActivity {
             myWebView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         }
         myWebView.loadUrl("https://www.columbus.gov/publicservice/RecyColumbus/");
+    }
+
+    private boolean hasNetworkConnection() {
+        ConnectivityManager connectivityManager =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo =
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        boolean isConnected = true;
+        boolean isWifiAvailable = networkInfo.isAvailable();
+        boolean isWifiConnected = networkInfo.isConnected();
+        networkInfo =
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        boolean isMobileAvailable = networkInfo.isAvailable();
+        boolean isMobileConnnected = networkInfo.isConnected();
+        isConnected = (isMobileAvailable&&isMobileConnnected) ||
+                (isWifiAvailable&&isWifiConnected);
+        return(isConnected);
     }
 
 }

@@ -1,6 +1,8 @@
 package com.bignerdranch.android.recycolumbus;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
@@ -101,12 +103,18 @@ public class SettingsActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 else{
-                    Context context = getApplicationContext();
-                    CharSequence text = "No Internet Connection";
-                    int duration = Toast.LENGTH_SHORT;
+                    AlertDialog.Builder alert = new AlertDialog.Builder(SettingsActivity.this);
+                    alert.setTitle("Warning");
+                    alert.setMessage("No Internet Connection");
+                    alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
 
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
+                    AlertDialog temp = alert.create();
+                    temp.show();
                 }
             }
         });
@@ -119,12 +127,18 @@ public class SettingsActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 else{
-                    Context context = getApplicationContext();
-                    CharSequence text = "No Internet Connection";
-                    int duration = Toast.LENGTH_SHORT;
+                    AlertDialog.Builder alert = new AlertDialog.Builder(SettingsActivity.this);
+                    alert.setTitle("Warning");
+                    alert.setMessage("No Internet Connection");
+                    alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
 
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
+                    AlertDialog temp = alert.create();
+                    temp.show();
                 }
             }
         });
@@ -146,12 +160,18 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
         if(isConnected == false){
-            Context context = getApplicationContext();
-            CharSequence text = "No Internet Connection";
-            int duration = Toast.LENGTH_SHORT;
+            AlertDialog.Builder alert = new AlertDialog.Builder(SettingsActivity.this);
+            alert.setTitle("Warning");
+            alert.setMessage("No Internet Connection");
+            alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
 
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
+            AlertDialog temp = alert.create();
+            temp.show();
         }
     }
 
