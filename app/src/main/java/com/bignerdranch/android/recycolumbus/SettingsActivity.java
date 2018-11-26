@@ -83,7 +83,7 @@ public class SettingsActivity extends AppCompatActivity {
         nameText = findViewById(R.id.nameText);
 
         //Get user's email from firebase
-        boolean isConnected = hasNetworkConnection();
+        final boolean isConnected = hasNetworkConnection();
         if(isConnected == true) {
             final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             final String email = user.getEmail();
@@ -96,16 +96,36 @@ public class SettingsActivity extends AppCompatActivity {
         delete_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SettingsActivity.this, DeleteAccountFragment.class);
-                startActivity(intent);
+                if(isConnected == true) {
+                    Intent intent = new Intent(SettingsActivity.this, DeleteAccountFragment.class);
+                    startActivity(intent);
+                }
+                else{
+                    Context context = getApplicationContext();
+                    CharSequence text = "No Internet Connection";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
             }
         });
 
         changePass_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SettingsActivity.this, ChangePasswordFragment.class);
-                startActivity(intent);
+                if(isConnected == true) {
+                    Intent intent = new Intent(SettingsActivity.this, ChangePasswordFragment.class);
+                    startActivity(intent);
+                }
+                else{
+                    Context context = getApplicationContext();
+                    CharSequence text = "No Internet Connection";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
             }
         });
         

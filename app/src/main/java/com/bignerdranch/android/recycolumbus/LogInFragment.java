@@ -1,6 +1,9 @@
 package com.bignerdranch.android.recycolumbus;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -19,6 +22,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import static android.content.Context.CONNECTIVITY_SERVICE;
+import static android.support.v4.content.ContextCompat.getSystemService;
 
 public class LogInFragment extends Fragment {
 
@@ -100,4 +106,5 @@ public class LogInFragment extends Fragment {
 
         return valid;
     }
+
 }
